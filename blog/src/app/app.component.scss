@@ -1,0 +1,27 @@
+body {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 60px calc(100% - 60px);
+  grid-template-areas:
+    "header header header header"
+    "content content content sidebar";
+}
+
+app-navbar {
+  grid-area: header;
+}
+
+main {
+  grid-area: content;
+  background-color: white;
+}
+
+aside {
+  grid-area: sidebar;
+  padding-left: 20px;
+}
