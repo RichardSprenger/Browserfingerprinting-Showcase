@@ -25,6 +25,11 @@ public class FingerprintServiceImpl implements FingerprintService {
     BrowserIdRepositroy browserIdRepositroy;
 
     @Override
+    public List<BrowserId> getAllIds() {
+        return browserIdRepositroy.findAll();
+    }
+
+    @Override
     public Optional<List<History>> getHistoryForID(String id) {
         return getHistoryForBrowserId(getBrowserIdByString(id));
     }

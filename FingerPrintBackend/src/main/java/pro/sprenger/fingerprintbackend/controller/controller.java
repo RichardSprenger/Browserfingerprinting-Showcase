@@ -17,6 +17,11 @@ public class controller {
     @Autowired
     FingerprintService fingerprintService;
 
+    @RequestMapping(value = "/id", method = RequestMethod.GET)
+    public ResponseEntity<List<BrowserIdDTO>> getAllId() {
+        return ResponseEntity.ok().body(fingerprintService.getAllIds().stream().map(BrowserIdDTO::new).collect(Collectors.toList()));
+    }
+
     // check if browser id is existend -> if not create id
     @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
     public ResponseEntity<BrowserIdDTO> checkId(@PathVariable String id) {
