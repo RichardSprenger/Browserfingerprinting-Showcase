@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, Observable, of } from 'rxjs';
 
 const API_URl = environment.apiBaseUrl;
 
@@ -33,11 +33,12 @@ export class VisitoridService {
   }
 
   updateHistory(event: any) {
-    return this.http.put(API_URl + '/history', {url: event.url, browserId: this.visitorId});
+    return this.http.put(API_URl + '/history', {url: "/blog" + event.url, browserId: this.visitorId});
   }
 
-  getAd() {
-    return this.http.get(API_URl + '/ad' + this.visitorId);
+  getAd(): Observable<string> {
+    var id = this.visitorId !== "" ? this.visitorId : undefined;
+    return this.http.get(API_URl + '/ad/' + id, {responseType: 'text'});
   }
 
 }

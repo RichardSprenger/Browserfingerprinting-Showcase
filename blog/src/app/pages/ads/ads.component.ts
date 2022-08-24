@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { Router } from '@angular/router';
+import { interval, Subscription } from 'rxjs';
+import { Item, ItemService } from 'src/app/services/item.service';
+import { VisitoridService } from 'src/app/services/visitorid.service';
 
 @Component({
   selector: 'app-ads',
@@ -9,11 +11,32 @@ import { filter } from 'rxjs';
 })
 export class AdsComponent implements OnInit {
 
+  item!: Item;
+
+  adSubscription: Subscription;
+
   constructor(
     private router: Router,
-  ) { }
+    private visitorId: VisitoridService,
+    private itemService: ItemService
+  ) {
+    this.loadAd();
+    this.adSubscription = interval(10000).subscribe(x => {
+      this.loadAd();
+    })
+  }
 
   ngOnInit(): void {
-      }
 
+  }
+
+  loadAd() {
+    var item = 1;
+    if (this.visitorId.getVisitorId() != "") this.visitorId.getAd().subscribe(ad => {
+      item = Number(ad.split("/").pop())
+      this.itemService.getItemById(item).subscribe(item => {
+        if (item) this.item = item;
+      })
+    });
+  }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class controller {
+public class MainController {
 
     @Autowired
     FingerprintService fingerprintService;
@@ -30,7 +30,7 @@ public class controller {
 
     @RequestMapping(value = "/history/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<HistoryDTO>> getHistroyForId(@PathVariable String id) {
-        return ResponseEntity.ok().body(fingerprintService.getHistoryForID(id).get().stream().map(HistoryDTO::new).collect(Collectors.toList()));
+        return ResponseEntity.ok().body(fingerprintService.getHistoryForID(id).stream().map(HistoryDTO::new).collect(Collectors.toList()));
     }
 
     // update history
@@ -40,12 +40,10 @@ public class controller {
     }
 
     // get ad for id
-    @RequestMapping(value = "/ad", method = RequestMethod.GET)
+    @RequestMapping(value = "/ad/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getAdForID(@PathVariable String id) {
         return ResponseEntity.ok().body(fingerprintService.getAd(id));
     }
 
     // reference user to id
-
-
 }

@@ -8,12 +8,14 @@ import { FingerprintjsProAngularModule } from '@fingerprintjs/fingerprintjs-pro-
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component'
 import { HttpClientModule } from '@angular/common/http';
+import { ItemComponent } from './pages/item/item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    ItemComponent
   ],
   imports: [
     BrowserModule,

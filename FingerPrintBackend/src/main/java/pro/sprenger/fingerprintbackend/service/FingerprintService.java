@@ -14,7 +14,7 @@ public interface FingerprintService {
 
     BrowserId getBrowserIdByString(String id);
 
-    Optional<List<History>> getHistoryForID(String id);
+    List<History> getHistoryForID(String id);
 
     List<History> updateHistoryForID(HistoryDTO historyDTO);
 

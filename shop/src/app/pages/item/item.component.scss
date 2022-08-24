@@ -1,0 +1,29 @@
+main {
+  width: 80%;
+  margin-left: 10%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px lightgray;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center;
+
+  img {
+    margin-top: 20px;
+    width: 600px;
+    border-radius: 2px;
+    box-shadow: 2px 2px 5px lightgray;
+  }
+
+  h1 {
+    width: 400px;
+    background-color: #6610F2;
+    position: relative;
+    margin-right: 195px;
+    color: white;
+    padding: 20px 5px;
+    border-radius: 0px 5px 5px 0px;
+  }
+}
