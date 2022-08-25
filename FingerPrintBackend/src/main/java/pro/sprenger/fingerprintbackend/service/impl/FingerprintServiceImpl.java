@@ -25,7 +25,12 @@ public class FingerprintServiceImpl implements FingerprintService {
     BrowserIdRepositroy browserIdRepositroy;
 
     @Override
-    public Optional<List<History>> getHistoryForID(String id) {
+    public List<BrowserId> getAllIds() {
+        return browserIdRepositroy.findAll();
+    }
+
+    @Override
+    public List<History> getHistoryForID(String id) {
         return getHistoryForBrowserId(getBrowserIdByString(id));
     }
 
@@ -36,18 +41,22 @@ public class FingerprintServiceImpl implements FingerprintService {
         history.setUrl(historyDTO.getUrl());
         history.setBrowserId(browserId);
         historyRepository.save(history);
-        return getHistoryForBrowserId(browserId).get();
+        return getHistoryForBrowserId(browserId);
     }
 
     @Override
     public String getAd(String id) {
         BrowserId browserId = getBrowserIdByString(id);
-        Optional<List<History>> histories = getHistoryForBrowserId(browserId);
-        if (!histories.isPresent()) return "http://localhost:4200/shop/1";
-        return histories.get().stream().filter(history -> history.getUrl().contains("/shop/")).findFirst().get().getUrl();
+        List<History> histories = getHistoryForBrowserId(browserId);
+        if (histories.size() == 0) return "/shop/1";
+        List<History> history = histories.stream().filter(hist ->
+                hist.getUrl().contains("/shop/")
+        ).toList();
+        if (history.size() > 0) return history.get(history.size() - 1).getUrl();
+        return "/shop/1";
     }
 
-    public Optional<List<History>> getHistoryForBrowserId(BrowserId browserId) {
+    public List<History> getHistoryForBrowserId(BrowserId browserId) {
         return historyRepository.findHistoriesByBrowserId(browserId);
     }
 
@@ -57,8 +66,9 @@ public class FingerprintServiceImpl implements FingerprintService {
 
     @Override
     public BrowserId getBrowserIdByString(String id) {
-        BrowserId ref = browserIdRepositroy.findBrowserIdByBroswerId(id).orElse(new BrowserId());
-        if (isNull(ref.getId())) {
+        BrowserId ref = browserIdRepositroy.findByBrowserId(id).orElse(new BrowserId());
+
+        if (ref.getId() == 0) {
             ref.setBrowserId(id);
             ref = browserIdRepositroy.save(ref);
         }

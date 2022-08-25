@@ -20,7 +20,6 @@ export class BlogComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.blogService.getBlogById(params['id']).subscribe(blog => {
-        console.log(blog);
         // if (blog == undefined)
         //   this.router.navigate(['not-found']);
         if (blog != undefined) {

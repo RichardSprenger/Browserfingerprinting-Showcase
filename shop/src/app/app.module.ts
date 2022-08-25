@@ -7,12 +7,15 @@ import { AppComponent } from './app.component';
 import { FingerprintjsProAngularModule } from '@fingerprintjs/fingerprintjs-pro-angular';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component'
+import { HttpClientModule } from '@angular/common/http';
+import { ItemComponent } from './pages/item/item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    ItemComponent
   ],
   imports: [
     BrowserModule,
@@ -20,6 +23,7 @@ import { HomeComponent } from './pages/home/home.component'
     FingerprintjsProAngularModule.forRoot({loadOptions: {
       apiKey: "F3OByzO6je3Izn9H0Aux", region: "eu"
     }}),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

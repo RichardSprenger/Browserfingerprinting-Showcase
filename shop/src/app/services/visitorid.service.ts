@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 const API_URl = environment.apiBaseUrl;
 
@@ -11,7 +13,11 @@ export class VisitoridService {
 
   visitorId: string = "";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) {
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe((val) => {
+      this.updateHistory(val).subscribe(() => {});
+    });
+  }
 
   checkId(id: string) {
     return this.http.get(API_URl + '/id/' + id);
@@ -26,8 +32,8 @@ export class VisitoridService {
     this.checkId(visitorId).subscribe(() => {});
   }
 
-  updateHistory(url: String) {
-    return this.http.post(API_URl + '/history', {url: url, browserId: this.visitorId});
+  updateHistory(event: any) {
+    return this.http.put(API_URl + '/history', {url: "/shop" + event.url, browserId: this.visitorId});
   }
 
   getAd() {

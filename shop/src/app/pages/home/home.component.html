@@ -1,1 +1,11 @@
-<p>home works!</p>
+<div class="wrapper">
+  <div class="items">
+    <div *ngFor="let item of items" class="item" routerLink="/item/{{item.id}}">
+      <img [src]="item.image" [alt]="item.name">
+      <div class="info">
+        <h1>{{ item.name }}</h1>
+        <h3>{{ item.price }} €</h3>
+      </div>
+    </div>
+  </div>
+</div>

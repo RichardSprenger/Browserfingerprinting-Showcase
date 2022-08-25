@@ -1,1 +1,7 @@
-<p>ads works!</p>
+<div *ngIf="item" (click)="gotoAd()">
+  WERBUNG
+
+  <img [src]="item.image" [alt]="item.name">
+  <h1>{{ item.name }}</h1>
+  <h2>{{ item.price }} €</h2>
+</div>

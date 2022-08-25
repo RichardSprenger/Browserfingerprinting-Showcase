@@ -1,4 +1,17 @@
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
+  table {
+    width: 80%;
+
+    tr:hover {
+      background-color: rgb(245, 245, 245);
+    }
+  }
+}
 
 .error-search {
   color: #f44336;
@@ -6,3 +19,4 @@
   font-weight: 500;
   margin-bottom: 1rem;
 }
+

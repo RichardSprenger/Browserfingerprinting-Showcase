@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface BrowserIdRepositroy extends JpaRepository<BrowserId, Long> {
 
-    Optional<BrowserId> findBrowserIdByBroswerId(String id);
+    Optional<BrowserId> findByBrowserId(String id);
 }

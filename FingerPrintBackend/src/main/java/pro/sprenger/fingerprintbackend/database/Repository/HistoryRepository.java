@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HistoryRepository extends JpaRepository<History, Long> {
-    Optional<List<History>> findHistoriesByBrowserId(BrowserId idReference);
+    List<History> findHistoriesByBrowserId(BrowserId idReference);
 }
