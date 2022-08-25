@@ -1,0 +1,6 @@
+<div *ngIf="password == 'helloWorld'">
+  <router-outlet></router-outlet>
+</div>
+<div *ngIf="password != 'helloWorld'">
+  <input type="text" (keyup)="onKey($event)">
+</div>
