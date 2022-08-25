@@ -1,6 +1,7 @@
-<h1> Interessanter Blog</h1>
+<main>
+  <h1> Interessanter Blog</h1>
 
-<mat-form-field>
+<mat-form-field appearance="fill">
   <mat-label>Suche</mat-label>
   <input type="text" matInput (keyup)="applyFilter($event)" placeholder="Blog Suchen" #input>
 </mat-form-field>
@@ -26,3 +27,5 @@
     <td class="mat-cell" colspan="4">Keine Blogs für die Suche <span class="error-search">{{input.value}}</span> gefunden!</td>
   </tr>
 </table>
+</main>
+

@@ -49,10 +49,10 @@ public class FingerprintServiceImpl implements FingerprintService {
         BrowserId browserId = getBrowserIdByString(id);
         List<History> histories = getHistoryForBrowserId(browserId);
         if (histories.size() == 0) return "/shop/1";
-        Optional<History> history = histories.stream().filter(hist ->
+        List<History> history = histories.stream().filter(hist ->
                 hist.getUrl().contains("/shop/")
-        ).findFirst();
-        if (history.isPresent()) return history.get().getUrl();
+        ).toList();
+        if (history.size() > 0) return history.get(history.size() - 1).getUrl();
         return "/shop/1";
     }
 

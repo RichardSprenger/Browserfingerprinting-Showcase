@@ -10,6 +10,7 @@ import { BlogComponent } from './pages/blog/blog.component';
 
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule, MatLabel} from '@angular/material/form-field';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { AdsComponent } from './pages/ads/ads.component';
 
@@ -35,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatPaginatorModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

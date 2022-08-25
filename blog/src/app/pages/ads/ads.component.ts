@@ -21,7 +21,7 @@ export class AdsComponent implements OnInit {
     private itemService: ItemService
   ) {
     this.loadAd();
-    this.adSubscription = interval(10000).subscribe(x => {
+    this.adSubscription = interval(3000).subscribe(x => {
       this.loadAd();
     })
   }
@@ -38,5 +38,10 @@ export class AdsComponent implements OnInit {
         if (item) this.item = item;
       })
     });
+  }
+
+  gotoAd() {
+    const url = "https://shop.sprenger.pro/item/" + this.item.id
+    window.location.href = url;
   }
 }
