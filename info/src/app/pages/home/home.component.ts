@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BrowserID, VisitoridService } from 'src/app/services/visitorid.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { interval, Subscription } from 'rxjs';
 
 
 @Component({
@@ -14,12 +15,21 @@ export class HomeComponent implements OnInit {
   displayedColumns: string[] = ['browserId'];
   dataSource = new MatTableDataSource();
 
-  constructor(private visitor: VisitoridService, private router: Router) { }
+  adSubscription: Subscription;
+
+  constructor(private visitor: VisitoridService, private router: Router) {
+    this.adSubscription = interval(1000).subscribe(x => {
+      this.getIds();
+    })
+  }
 
   ngOnInit(): void {
+    this.getIds();
+  }
+
+  getIds() {
     this.visitor.getAllIds().subscribe(res => {
       this.dataSource.data = res;
-      console.log(this.dataSource.data)
     })
   }
 
